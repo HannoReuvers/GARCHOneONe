@@ -16,7 +16,7 @@ function [ScaledMinusLogLik] = GARCH11ObjFunc2Minimise(theta, yt)
 
     %--- Estimate GARCH(1,1) process ---%
     % Initialize recursions from unconditional variance
-    sigma2t0 = omega/(1-alpha-beta);
+    sigma2t0 = max(omega/(1-alpha-beta), omega/(1-0.99)); % Use max to prevent negative sigma2t0
     yt0 = sqrt(sigma2t0);
 
     % Recursion to reconstruct volatility process
